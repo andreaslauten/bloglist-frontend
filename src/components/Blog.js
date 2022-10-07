@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Blog = ({ blog, updateBlog, removeBlogWithId}) => {
+const Blog = ({ blog, updateBlog, removeBlogWithId }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -15,7 +15,7 @@ const Blog = ({ blog, updateBlog, removeBlogWithId}) => {
     setDetailedView(!detailedView)
   }
 
-  const addLike = (event) =>{
+  const addLike = (event) => {
     event.preventDefault()
 
     const updatedBlog = {
@@ -25,7 +25,7 @@ const Blog = ({ blog, updateBlog, removeBlogWithId}) => {
       title: blog.title,
       url: blog.url
     }
-    
+
     updateBlog(blog.id, updatedBlog)
   }
 
@@ -35,7 +35,7 @@ const Blog = ({ blog, updateBlog, removeBlogWithId}) => {
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
       removeBlogWithId(blog.id)
     }
-    
+
   }
 
   const permissionToDelete = () => {
@@ -47,20 +47,20 @@ const Blog = ({ blog, updateBlog, removeBlogWithId}) => {
 
   return (
     <div style={blogStyle}>
-      {blog.title} {blog.author} 
+      {blog.title} {blog.author}
       <button onClick={toggleDetailedView}>{detailedView ? 'hide' : 'view'}</button>
-      {detailedView ? 
-      <div>
-        <div>{blog.url}</div>
-        <div>likes {blog.likes} <button onClick={addLike}>like</button></div>
-        <div>{blog.user.name}</div>
-        {permissionToDelete() ? 
-        <button onClick={removeBlog}>remove</button> :
-        <></>}
-        
-      </div>
-      : <></>}
-    </div>  
+      {detailedView ?
+        <div>
+          <div>{blog.url}</div>
+          <div>likes {blog.likes} <button onClick={addLike}>like</button></div>
+          <div>{blog.user.name}</div>
+          {permissionToDelete() ?
+            <button onClick={removeBlog}>remove</button> :
+            <></>}
+
+        </div>
+        : <></>}
+    </div>
   )
 }
 
