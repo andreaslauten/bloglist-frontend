@@ -40,14 +40,14 @@ const Blog = ({ blog, updateBlog, removeBlogWithId }) => {
 
   const permissionToDelete = () => {
     const loggedBlogappUser = JSON.parse(window.localStorage.getItem('loggedBlogappUser'))
-    return loggedBlogappUser.username === blog.user.username ?
-      true :
-      false
+    if (loggedBlogappUser) {
+      return loggedBlogappUser.username === blog.user.username
+    }
   }
 
   return (
     <div style={blogStyle}>
-      {blog.title} {blog.author}
+      <div>{blog.title} {blog.author}</div>
       <button onClick={toggleDetailedView}>{detailedView ? 'hide' : 'view'}</button>
       {detailedView ?
         <div>
@@ -57,7 +57,6 @@ const Blog = ({ blog, updateBlog, removeBlogWithId }) => {
           {permissionToDelete() ?
             <button onClick={removeBlog}>remove</button> :
             <></>}
-
         </div>
         : <></>}
     </div>
